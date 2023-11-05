@@ -1,0 +1,21 @@
+{% extends "base.html" %} {% block content %}
+<div class="p-3" style="height: 1rem">
+  <h1>{{title}}</h1>
+</div>
+<form method="POST">
+  {{form.hidden_tag()}}
+  <div class="p-5">
+    <div class="container-fluid">
+      <div class="mb-3">
+        <label class="form-label">Title: </label>
+        {{form.title(class="form-control")}}
+      </div>
+      <div class="mb-3">
+        <label class="form-label">Text: </label>
+        {{form.text(class="form-control", style="height: 22.6rem")}}
+      </div>
+      <div class="mb-3">{{form.submit(class="btn btn-primary")}}</div>
+    </div>
+  </div>
+</form>
+{% endblock %}

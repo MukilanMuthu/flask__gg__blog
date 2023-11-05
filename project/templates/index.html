@@ -1,0 +1,45 @@
+{% extends "base.html" %} {% block content %}
+<div class="p-3">
+  <h1>GG Blog</h1>
+</div>
+<div class="p-5">
+  {% for post in blog_post.items %}
+  <div class="card">
+    <a
+      href="{{url_for('blog_post.blog_posts', blog_post_id=post.id)}}"
+      style="text-decoration: none; color: inherit"
+    >
+      <div class="card-body">
+        <h5 class="card-title">{{post.title}}</h5>
+        <p class="card-text">{{post.text}}</p>
+      </div>
+    </a>
+    <div class="card-body">
+      <a href="{{url_for('users.user_posts', username=post.author.username)}}"
+        >Written by: {{post.author.username}}</a
+      >
+      <p>Published on: {{post.date.strftime('%d %B, %Y')}}</p>
+    </div>
+  </div>
+  <br />
+  {% endfor %}
+</div>
+<nav aria-label="Page navigation example">
+  <ul class="pagination justify-content-center">
+    {% for page_num in blog_post.iter_pages(left_edge=1, right_edge=1,
+    left_current=1, right_current=2) %} {% if blog_post.page==page_num %}
+    <li class="page-item active">
+      <a class="page-link" href="{{url_for('core.index', page=page_num)}}"
+        >{{page_num}}</a
+      >
+    </li>
+    {% else %}
+    <li class="page-item">
+      <a class="page-link" href="{{url_for('core.index', page=page_num)}}"
+        >{{page_num}}</a
+      >
+    </li>
+    {% endif %} {% endfor %}
+  </ul>
+</nav>
+{% endblock %}
